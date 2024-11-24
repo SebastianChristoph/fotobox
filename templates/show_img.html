@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ihr Bild:</h1>
+    {{img_name}}
+
+    <div style="width: 50%">
+        <img style="width: 100%" src="{{ url_for('static', filename='images/'+img_name)}}" alt="">
+    </div>
+    
+
+    <p>Drucken?</p>
+    <a href="{{ url_for('print')}}" >Ja</a>
+    <a href="{{ url_for('preview')}}" >Nein</a>
+</body>
+</html>
