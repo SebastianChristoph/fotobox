@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* Container */
+    .image-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 gleich große Spalten */
+        gap: 10px; /* Abstand zwischen den Bildern */
+        width: 100%; /* Volle Breite */
+    }
+
+    /* Bild-Elemente */
+    .image-container img {
+        width: 100%; /* Volle Breite der Spalte */
+        height: auto; /* Verhältnis der Bilder beibehalten */
+    }
+</style>
+
+<body>
+    <h1>Bilderrahmen hinzufügen</h1>
+    <p>Bitte wählen Sie einen Bilderrahmen aus, der um jedes Foto gelegt werden soll.</p>
+
+    <div class="image-container">
+
+    <img src="https://placehold.co/600x400" alt="">
+    <img src="https://placehold.co/600x400" alt="">
+    <img src="https://placehold.co/600x400" alt="">
+    <img src="https://placehold.co/600x400" alt="">
+    <img src="https://placehold.co/600x400" alt="">
+    <img src="https://placehold.co/600x400" alt="">
+</div>
+
+    <a href="{{ url_for('personalize')}}" >Ohne Bilderrahmen fortfahren</a>
+</body>
+</html>

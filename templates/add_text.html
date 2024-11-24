@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* Container */
+    .text-container {
+        position: relative; /* Ermöglicht absolute Positionierung für das Text-Element */
+        width: 100%; /* Volle Breite */
+        height: 300px; /* Beispielhöhe */
+        background-image: url('https://placehold.co/600x400'); /* Hintergrundbild */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end; /* Vertikale Positionierung am unteren Rand */
+        justify-content: center; /* Horizontale Zentrierung */
+    }
+
+    /* Text */
+    .text-container .centered-text {
+        position: relative;
+        bottom: 10%; /* Verschiebt den Text um ca. 1/3 nach oben */
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund für bessere Lesbarkeit */
+        border-radius: 8px;
+    }
+
+      /* Haupt-Container */
+      .keyboard-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 800px; /* Optional: maximale Breite */
+            margin: 0 auto;
+        }
+
+        /* Zeile-Container */
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        /* Einzelne Taste */
+        .key {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            margin: 3px;
+            background-color: #ddd;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Spezial-Tasten (Leertaste, Punkt) */
+        .key-space {
+            width: 150px; /* Größer für die Leertaste */
+        }
+        .key-punkt {
+            width: 70px; /* Größer für Punkt */
+        }
+</style>
+
+
+<body>
+    <h1>Text hinzufügen</h1>
+
+    <div class="text-container">
+        <div class="centered-text">
+            <p id="show-text">{{text_to_show}}</p>
+        </div>
+    </div>
+
+    <div class="keyboard-container">
+    <!-- Zeile 1: Zahlen -->
+    <div class="keyboard-row">
+        <div class="key" id="key-1">1</div>
+        <div class="key" id="key-2">2</div>
+        <div class="key" id="key-3">3</div>
+        <div class="key" id="key-4">4</div>
+        <div class="key" id="key-5">5</div>
+        <div class="key" id="key-6">6</div>
+        <div class="key" id="key-7">7</div>
+        <div class="key" id="key-8">8</div>
+        <div class="key" id="key-9">9</div>
+        <div class="key" id="key-0">0</div>
+        <div class="key key-punkt" id="key-delete"><<</div>
+    </div>
+
+    <!-- Zeile 2: QWERTZUIOP -->
+    <div class="keyboard-row">
+        <div class="key" id="key-q">Q</div>
+        <div class="key" id="key-w">W</div>
+        <div class="key" id="key-e">E</div>
+        <div class="key" id="key-r">R</div>
+        <div class="key" id="key-t">T</div>
+        <div class="key" id="key-z">Z</div>
+        <div class="key" id="key-u">U</div>
+        <div class="key" id="key-i">I</div>
+        <div class="key" id="key-o">O</div>
+        <div class="key" id="key-p">P</div>
+        <div class="key" id="key-ü">Ü</div>
+    </div>
+
+    <!-- Zeile 3: ASDFGHJKLÖÄ -->
+    <div class="keyboard-row">
+        <div class="key" id="key-a">A</div>
+        <div class="key" id="key-s">S</div>
+        <div class="key" id="key-d">D</div>
+        <div class="key" id="key-f">F</div>
+        <div class="key" id="key-g">G</div>
+        <div class="key" id="key-h">H</div>
+        <div class="key" id="key-j">J</div>
+        <div class="key" id="key-k">K</div>
+        <div class="key" id="key-l">L</div>
+        <div class="key" id="key-ö">Ö</div>
+        <div class="key" id="key-ä">Ä</div>
+    </div>
+
+    <!-- Zeile 4: YXCVBNM SPACE . -->
+    <div class="keyboard-row">
+        <div class="key" id="key-y">Y</div>
+        <div class="key" id="key-x">X</div>
+        <div class="key" id="key-c">C</div>
+        <div class="key" id="key-v">V</div>
+        <div class="key" id="key-b">B</div>
+        <div class="key" id="key-n">N</div>
+        <div class="key" id="key-m">M</div>
+        <div class="key key-space" id="key-space">SPACE</div>
+        <div class="key key-punkt" id="key-punkt">.</div>
+    </div>
+</div>
+
+<form action="/personalize" method="post">
+    <input type="hidden" name="text_to_show" id="text_to_show" value="{{text_to_show}}">
+
+    <h2>Schriftart wählen</h2>
+
+    <input type="radio" id="font1" name="font_style" value="Font1" checked="checked">
+    <label for="font1">Font1</label><br>
+    <input type="radio" id="font2" name="font_style" value="Font2">
+    <label for="font2">Font2</label><br>
+    <input type="radio" id="font3" name="font_style" value="Font3">
+    <label for="font3">Font3</label>
+
+        <br>
+    <input type="submit" value="Ok">
+</form>
+
+
+<a href="{{ url_for('personalize')}}" >Zurück</a>
+
+<script>
+    let text = '{{text_to_show}}';  // Variable, die den Text speichert
+    const showText = document.getElementById('show-text'); // Referenz zum Paragraphen
+    const inputText = document.getElementById('text_to_show'); // Referenz zum Input-Feld
+
+    // Funktion, um den Text zu aktualisieren
+    function updateText() {
+        showText.textContent = text; // Setzt den Inhalt des Paragraphen
+        inputText.value = text; 
+    }
+
+    // Funktion, die beim Klicken auf eine Taste ausgeführt wird
+    function handleKeyClick(key) {
+        if (key === 'space') {
+            text += ' ';  // Wenn Space gedrückt wird, füge ein Leerzeichen hinzu
+        } else {
+            text += key;  // Andernfalls füge den gedrückten Buchstaben hinzu
+        }
+        updateText();  // Aktualisiere die Textanzeige
+    }
+
+    // Löscht den letzten Buchstaben, wenn vorhanden
+    function deleteLastCharacter() {
+        text = text.slice(0, -1);  // Entfernt das letzte Zeichen
+        updateText();  // Aktualisiere die Textanzeige
+    }
+
+    // Event-Listener für die Tastenklicks
+    document.querySelectorAll('.key').forEach(key => {
+        key.addEventListener('click', () => {
+            const keyId = key.id;
+            if (keyId === 'key-space') {
+                handleKeyClick('space');
+            } else if (keyId === 'key-delete') {
+                deleteLastCharacter();
+            } else {
+                handleKeyClick(key.textContent);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
