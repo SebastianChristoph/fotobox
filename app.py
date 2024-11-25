@@ -4,20 +4,14 @@ from camera_pi import Camera
 import subprocess
 from datetime import datetime
 import cups
+import img_edit
 
 app = Flask(__name__)
 
 text_to_show = ""
 font_style = ""
 current_img = ""
-
-def clear_static_images():
-    static_folder = "/home/pi/fotobox/static"
-    for filename in os.listdir(static_folder):
-        file_path = os.path.join(static_folder, filename)
-
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+current_img_path = ""
 
 def print_image():
     image_path = f"/home/pi/fotobox/static/images/{current_img}"
@@ -41,7 +35,6 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
@@ -55,8 +48,9 @@ def take_picture():
     now = datetime.now()
     img_name = now.strftime("%Y-%m-%d-%H-%M-%S") + ".jpg"
     current_img = img_name
-
-    clear_static_images()
+    current_img_path = f'static/images/{img_name}'
+    img_edit.resize_img(current_img_path)
+    img_edit.add_text_to_image(current_img_path, text_to_show, "Normal")
 
     subprocess.run(['gphoto2', '--capture-image-and-download',  '--filename', f'static/images/{img_name}'])
     return render_template('show_img.html', img_name = img_name)
