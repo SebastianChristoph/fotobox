@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h1>Schriftart wählen</h1>
+  
+<form action="/personalize" method="post">
+    <input type="hidden" name="text_to_show" id="text_to_show" value="{{text_to_show}}">
+    
+    <input type="radio" id="font1" name="font_style" value="Normal" checked="checked">
+    <label class='font-normal' for="font1">Maxi & Max Mustermann 2024</label><br><br>
+
+    <input type="radio" id="font2" name="font_style" value="Boho">
+    <label class='font-boho' for="font2">Maxi & Max Mustermann 2024</label><br><br>
+
+    <input type="radio" id="font3" name="font_style" value="Love">
+    <label class='font-love' for="font3">Maxi & Max Mustermann 2024</label><br><br>
+
+    <input type="radio" id="font4" name="font_style" value="Edel">
+    <label class='font-edel' for="font4">Maxi & Max Mustermann 2024</label>
+
+        <br>
+    <input class="btn-submit-100" type="submit" value="Ok">
+</form>
+
+{% endblock %}

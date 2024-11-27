@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Print</h1>
+{% extends "base.html" %}
 
-    <div style="width: 50%">
-        <img style="width: 100%" src="{{ url_for('static', filename='images/'+img_name)}}" alt="">
+{% block main %}
+
+    <div style="width: 100%">
+        <img style="display:block; width: 50%; margin:auto;" src="{{ url_for('static', filename='images/'+img_name)}}" alt="Bild zum Drucken">
     </div>
 
-    <a href="{{ url_for('preview')}}" >Ok</a>
-</body>
-</html>
+    <!-- Countdown-Text -->
+    <p style="font-size: 2rem;" id="countdown-message">Bild wird gedruckt. Bitte warten</p>
+
+    <script>
+        // Funktion zum Starten des Countdowns
+        function startCountdown() {
+            const countdownSeconds = 50; // Countdown in Sekunden
+            let count = countdownSeconds;
+
+            // Hole das Element für die Countdown-Anzeige
+            const countdownMessage = document.getElementById('countdown-message');
+
+            // Aktualisiere den Countdown-Text in Intervallen
+            const intervalId = setInterval(() => {
+                count--;
+                countdownMessage.textContent = `Bild wird gedruckt, bitte warten:  ${count} Sekunden`;
+
+                // Wenn der Countdown 0 erreicht, leite zur Zielseite weiter
+                if (count === 0) {
+                    clearInterval(intervalId);
+                    window.location.href = "{{ url_for('preview') }}"; // Weiterleitung
+                }
+            }, 1000); // Aktualisiere alle 1000 ms (1 Sekunde)
+        }
+
+        // Starte den Countdown beim Laden der Seite
+        window.onload = startCountdown;
+    </script>
+
+{% endblock %}

@@ -3,14 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Video Streaming Demonstration</title>
 </head>
+<style>
+      .knips{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+        }
+</style>
 <body>
-    <h1>Preview</h1>
 
-    <h1>Video Streaming Demonstration</h1>
-    <img src="{{ url_for('video_feed') }}">
+    <!-- Button zum Starten des Countdowns -->
+    <button class="knips" id="knips-button"></button>
+    
+    <!-- Bereich für den Countdown-Text -->
+    <p style="font-size: 3rem; font-weight: bold; font-family:sans-serif" id="countdown-message"></p>
 
-    <a href="{{ url_for('take_picture') }}">Knips</a>
+    <script>
+        // Funktion zum Starten des Countdowns beim Klick auf den Button
+        function startCountdown() {
+            const countdownSeconds = 3; // Countdown in Sekunden
+            let count = countdownSeconds;
+            
+            // Hole das Element für die Countdown-Anzeige
+            const countdownMessage = document.getElementById('countdown-message');
+            countdownMessage.textContent = `Foto wird in ${count} Sekunden aufgenommen...`;
+
+            // Countdown-Intervall starten
+            const intervalId = setInterval(() => {
+                count--;
+                countdownMessage.textContent = `Foto wird in ${count} Sekunden aufgenommen...`;
+
+                // Wenn Countdown zu Ende ist
+                if (count === 0) {
+                    clearInterval(intervalId);
+                    window.location.href = "{{ url_for('take_picture') }}"; // Weiterleitung zur Zielseite
+                }
+            }, 1000); // Aktualisiere alle 1000 ms (1 Sekunde)
+        }
+
+        // Event-Listener für den Button
+        document.getElementById('knips-button').addEventListener('click', startCountdown);
+        document.getElementById('knips-button').addEventListener('click', function() {this.style.display = 'none';});
+    </script>
 </body>
 </html>

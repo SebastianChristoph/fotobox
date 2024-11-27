@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div style="width: 100%">
+        <img style="display:block; width: 50%; margin:auto;" src="{{ url_for('static', filename='images/'+img_name)}}" alt="">
+    </div>
+
+    <p style="font-size: 2rem;">Bild wird an Drucker gesendet und Fehler gecheckt</p>
+    <p style="font-size: 2rem;">Der Druck startet in: <span id="countdown">25</span> Sekunden</p>
+
+
+    <script>
+        // Countdown in Sekunden
+        const countdownSeconds = 25;
+        
+        // Funktion zum Starten des Countdowns
+        function startCountdown() {
+            let count = countdownSeconds;
+            const countdownElement = document.getElementById('countdown'); // Element, das den Countdown anzeigt
+        
+            const intervalId = setInterval(() => {
+                count--;
+                countdownElement.textContent = count;
+        
+                if (count === 0) {
+                    clearInterval(intervalId);
+                    window.location.href = "{{ url_for('print_image_route') }}"; // Umleitung zur Druckseite
+                }
+            }, 1000); // Aktualisiere alle 1000ms (1 Sekunde)
+        }
+        
+        // Starte den Countdown beim Laden der Seite
+        window.onload = startCountdown;
+        </script>
+
+{% endblock %}

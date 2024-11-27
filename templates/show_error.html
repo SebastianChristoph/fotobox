@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+    <p style="font-size: 3rem;" id='error-message'>Fehler! {{ error }} (Wird in 10 Sekunden aktualisiert)</p>
+
+    <a class="btn-100" href="{{ url_for('abort_job') }}">Druck abbrechen</a>
+
+
+
+    <script>
+        // Countdown in Sekunden
+        const countdownSeconds = 10;
+
+        // Funktion zum Starten des Countdowns
+        function startCountdown() {
+            let count = countdownSeconds;
+            const errorMessage = document.getElementById('error-message');
+            
+            // Aktualisiere die Nachricht mit Countdown
+            const intervalId = setInterval(() => {
+                count--;
+                errorMessage.textContent = `Fehler! {{ error }} (Wird in ${count} Sekunden aktualisiert)`;
+
+                if (count === 0) {
+                    clearInterval(intervalId);
+                    window.location.href = "{{ url_for('show_error') }}";
+                }
+            }, 1000);
+        }
+
+        // Starte den Countdown beim Laden der Seite
+        window.onload = startCountdown;
+    </script>
+
+{% endblock %}
