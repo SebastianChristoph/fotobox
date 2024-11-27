@@ -35,9 +35,9 @@ def add_text_to_image(img_path, text, font):
     # Bestimmen der Schriftart basierend auf der Eingabe
     if font == "Boho":
         font_path += "Boho.otf"
-        font_size_factor = 0.1
-        y_versatz = 30
-        y_versatz_rect = 10
+        y_versatz = 25
+        y_versatz_rect = 20
+        font_size_factor = 0.07
     elif font == "Edel":
         y_versatz_rect = 35
         y_versatz = 15
@@ -46,7 +46,7 @@ def add_text_to_image(img_path, text, font):
         font_path += "Love.otf"
         y_versatz = 25
         y_versatz_rect = 5
-        font_size_factor = 0.1
+        font_size_factor = 0.06
     else:
         y_versatz_rect = 0
         y_versatz = 30
